@@ -9,7 +9,18 @@
   <h2 v-bind:class="isPromoted && 'promoted'">Promoted Movies</h2>
   <h2 v-bind:class="isSoldout ? 'sold-out' : 'new'">Soldout? Movies</h2>
   <h2 v-bind:class="['new', 'promoted']">Newly promoted movies</h2>
-  <h2 v-bind:class="[isPromoted && 'promoted', isSoldout ? 'sold-out' : 'new']">Array conditional movies</h2>
+  <h2 v-bind:class="[isPromoted && 'promoted', isSoldout ? 'sold-out' : 'new']">
+    Array conditional movies
+  </h2>
+  <h2 v-bind:class="{
+    promoted: isPromoted,
+    new: !isSoldout,
+    'sold-out': isSoldout,
+  }">Object conditional movies</h2>
+  <h2 v-bind:style="{
+    color: highlightColor,
+    fontSize: headerSize + 'px',
+  }">Inline Style</h2>
 </template>
 
 <script>
@@ -26,6 +37,8 @@ export default {
       status: "success",
       isPromoted: true,
       isSoldout: true,
+      highlightColor: "orange",
+      headerSize: 50,
     };
   },
 };
