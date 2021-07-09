@@ -9,7 +9,7 @@
   <h2 v-bind:class="isPromoted && 'promoted'">Promoted Movies</h2>
   <h2 v-bind:class="isSoldout ? 'sold-out' : 'new'">Soldout? Movies</h2>
   <h2 v-bind:class="['new', 'promoted']">Newly promoted movies</h2>
-  <h2 v-bind:class="[isPromoted && 'new', isSoldout ? 'sold-out' : 'new']">Array conditional movies</h2>
+  <h2 v-bind:class="[isPromoted && 'promoted', isSoldout ? 'sold-out' : 'new']">Array conditional movies</h2>
 </template>
 
 <script>
