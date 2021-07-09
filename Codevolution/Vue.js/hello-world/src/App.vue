@@ -20,7 +20,9 @@
   <h2 v-bind:style="{
     color: highlightColor,
     fontSize: headerSize + 'px',
+    padding: '20px',
   }">Inline Style</h2>
+  <h2 v-bind:style="headerStyleObject">Style Object</h2>
 </template>
 
 <script>
@@ -39,6 +41,11 @@ export default {
       isSoldout: true,
       highlightColor: "orange",
       headerSize: 50,
+      headerStyleObject: {
+        color: 'orange',
+        fontSize: '50px',
+        padding: '20px',
+      },
     };
   },
 };
