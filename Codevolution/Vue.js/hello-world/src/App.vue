@@ -1,4 +1,14 @@
 <template>
+  <h2>{{ 5 + 2 + 3 }}</h2>
+  <h2>{{ 10 + 5 + 15 }}</h2>
+  <h2>Add method - {{ add(2, 3, 5) }}</h2>
+  <h2>Add method - {{ add(10, 15, 20) }}</h2>
+  <h2>Multiply method - {{ multiply(baseValue) }}</h2>
+  <br>
+  <template v-for="name in names" :key="name">
+    <h2 v-if="name === 'Bruce'">{{ name }}</h2>
+  </template>
+  <br>
   <h2 v-for="(name, index) in names" :key="name">{{ index }} {{ name }}</h2>
   <h2 v-for="name in fullNames" :key="name">{{ name.first }} {{ name.last}}</h2>
   <div v-for="actor in actors" :key="actor.name">
@@ -112,7 +122,18 @@ export default {
         channel: "You're the most handsome guy in the world!",
         course: "Vue 3",
       },
+      baseMultiplier: 5,
+      baseValue: 2,
     };
+  },
+  methods: {
+    add(a, b, c) {
+      return a + b + c;
+    },
+    multiply (num) {
+      return num * this.baseMultiplier;
+      // don't use arrow functions
+    },
   },
 };
 </script>
