@@ -1,4 +1,28 @@
 <template>
+  <h2 v-for="(name, index) in names" :key="name">{{ index }} {{ name }}</h2>
+  <h2 v-for="name in fullNames" :key="name">{{ name.first }} {{ name.last}}</h2>
+  <div v-for="actor in actors" :key="actor.name">
+    <h2>{{ actor.name }}</h2>
+    <h3 v-for="movie in actor.movies" :key="movie">{{ movie }}</h3>
+  </div>
+  <h2 v-for="(value, key, index) in myInfo" :key="value">{{ index }}. {{ key }}: {{value }}</h2>
+  <template v-for="name in names" :key="name">
+    <h2>{{ name }}</h2>
+    <hr>
+  </template>
+  <br>
+  <h2 v-if="num === 0">The number is zero</h2>
+  <h2 v-else-if="num < 0">The number is negative</h2>
+  <h2 v-else-if="num > 0">The number is positive</h2>
+  <h2 v-else>Not a number</h2>
+  <template v-if="display">
+    <h2>Henry</h2>
+    <h2>You're the most handsome guy in the world!</h2>
+    <h2>Vue</h2>
+  </template>
+  <h2 v-show="showElement">Using v-show</h2>
+  <h2 v-if="showElement">Using v-if</h2>
+  <br>
   <div>{{ greet }} {{ name }}</div>
   <div v-html="channel"></div>
   <div v-html="hack"></div>
@@ -62,6 +86,31 @@ export default {
         color: 'darkred',
         backgroundColor: 'red',
         border: '1px solid red',
+      },
+      num: "Hi",
+      display: true,
+      showElement: false,
+      names: ["Henry", "Bruce", "Clark", "Diana"],
+      fullNames: [
+        { first: "Henry", last: "Wang" },
+        { first: "Bruce", last: "Wayne" },
+        { first: "Clark", last: "Kent" },
+        { first: "Princess", last: "Diana" },
+      ],
+      actors: [
+        {
+          name: "Christian Bale",
+          movies: ["The Batman", "The Prestige"],
+        },
+        {
+          name: "Di Caprio",
+          movies: ["Titanic", "Inception"],
+        },
+      ],
+      myInfo: {
+        name: "Henry",
+        channel: "You're the most handsome guy in the world!",
+        course: "Vue 3",
       },
     };
   },
