@@ -1,14 +1,26 @@
 <template>
+  <h2>{{ name }}</h2>
+  <div>
+    <button @click="changeName($event), increment(1, $event)">Change name</button>
+  </div>
+  <h2>{{ count }}</h2>
+  <div>
+    <button @click="increment(1, $event)">Increment 1</button>
+    <button @click="increment(5, $event)">Increment 5</button>
+    <button @click="decrement(1, $event)">Decrement 1</button>
+    <button @click="decrement(5, $event)">Decrement 5</button>
+  </div>
+  <hr>
   <h2>{{ 5 + 2 + 3 }}</h2>
   <h2>{{ 10 + 5 + 15 }}</h2>
   <h2>Add method - {{ add(2, 3, 5) }}</h2>
   <h2>Add method - {{ add(10, 15, 20) }}</h2>
   <h2>Multiply method - {{ multiply(baseValue) }}</h2>
-  <br>
+  <hr>
   <template v-for="name in names" :key="name">
     <h2 v-if="name === 'Bruce'">{{ name }}</h2>
   </template>
-  <br>
+  <hr>
   <h2 v-for="(name, index) in names" :key="name">{{ index }} {{ name }}</h2>
   <h2 v-for="name in fullNames" :key="name">{{ name.first }} {{ name.last}}</h2>
   <div v-for="actor in actors" :key="actor.name">
@@ -20,7 +32,7 @@
     <h2>{{ name }}</h2>
     <hr>
   </template>
-  <br>
+  <hr>
   <h2 v-if="num === 0">The number is zero</h2>
   <h2 v-else-if="num < 0">The number is negative</h2>
   <h2 v-else-if="num > 0">The number is positive</h2>
@@ -32,7 +44,7 @@
   </template>
   <h2 v-show="showElement">Using v-show</h2>
   <h2 v-if="showElement">Using v-if</h2>
-  <br>
+  <hr>
   <div>{{ greet }} {{ name }}</div>
   <div v-html="channel"></div>
   <div v-html="hack"></div>
@@ -124,15 +136,32 @@ export default {
       },
       baseMultiplier: 5,
       baseValue: 2,
+      count: 0,
     };
   },
   methods: {
+    changeName(event) {
+      if(this.name === "Henry")
+        this.name = "Batman";
+      else if(this.name === "Batman"){
+        this.name = "Henry";
+      }
+      console.log("Event", event);
+    },
     add(a, b, c) {
       return a + b + c;
     },
     multiply (num) {
       return num * this.baseMultiplier;
       // don't use arrow functions
+    },
+    increment(num, event) {
+      this.count += num;
+      console.log("Event", event)
+    },
+    decrement(num, event) {
+      this.count -= num;
+      console.log("Event", event)
     },
   },
 };
