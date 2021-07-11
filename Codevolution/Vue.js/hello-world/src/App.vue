@@ -24,6 +24,15 @@
         <option value="Fuck China">Fuck China</option>
       </select>
     </div>
+
+    <div>
+      <label for="job-location">Job Location</label>
+      <select id="job-location" multiple v-model="formValues.jobLocation">
+        <option value="Taiwan">Taiwan</option>
+        <option value="R.O.C.">R.O.C</option>
+        <option value="Fuck China">Fuck China</option>
+      </select>
+    </div>
   </form>
   <hr>
   <h2>{{ name }}</h2>
@@ -168,6 +177,8 @@ export default {
         name: "",
         profileSummary: "",
         country: "",
+        jobLocation: [],
+        remoteWork: false,
       },
     };
   },
