@@ -33,6 +33,17 @@
         <option value="Fuck China">Fuck China</option>
       </select>
     </div>
+
+    <div>
+      <input 
+        type="checkbox" 
+        id="remoteWork" 
+        v-model="formValues.remoteWork" 
+        true-value="yes" 
+        false-value="no" 
+      />
+      <label for="remoteWork">Open to remote work?</label>
+    </div>
   </form>
   <hr>
   <h2>{{ name }}</h2>
@@ -178,7 +189,7 @@ export default {
         profileSummary: "",
         country: "",
         jobLocation: [],
-        remoteWork: false,
+        remoteWork: "no",
       },
     };
   },
