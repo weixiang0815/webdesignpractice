@@ -1,13 +1,39 @@
 <template>
+  <h2>Volume Tracker (0-20)</h2>
+  <h3>Current Volume - {{ volume }}</h3>
+  <div>
+    <button @click="volume += 2">Increase</button>
+    <button @click="volume -= 2">Decrease</button>
+  </div>
+  <input type="text" v-model="movie">
+  <input type="text" v-model="movieInfo.title">
+  <input type="text" v-model="movieInfo.actor">
+  <button @click="movieList = movieList.concat(['Wonder Woman'])">Add movie</button>
+  <hr>
+  <h2>Fullname - {{ firstName }} {{ lastName }}</h2>
+  <h2>Computed fullname - {{ fullName }}</h2>
+  <button @click="changeFullName">Change Fullname</button>
+
+  <button @click="items.push({id: 4, title: 'Keyboard', price: 50})">Add item</button>
+  <h2>Computed Total - {{ total }}</h2>
+  <h2>Method Total - {{ getTotal() }}</h2>
+  <input type="text" v-model="country">
+
+  <template v-for="item in items" :key="item.id">
+    <h2 v-if="item.price > 100">{{ item.title }} {{ item.price }}</h2>
+  </template>
+
+  <h2 v-for="item in expensiveItems" :key="item.id">{{ item.title }} {{ item.price }}</h2>
+  <hr>
   <div>
     <pre>
       {{ JSON.stringify(formValues, null, 2) }}
     </pre>
   </div>
-  <form @submit="submitForm">
+  <form @submit.prevent="submitForm">
     <div>
       <label for="name">Name</label>
-      <input type="text" id="name" v-model="formValues.name">
+      <input type="text" id="name" v-model.trim.lazy="formValues.name">
     </div>
 
     <div>
@@ -88,8 +114,13 @@
     </div>
 
     <div>
-      <button>Submit</button>
+      <label for="age">Age</label>
+      <input @keyup.enter="submitForm" type="number" id="age" v-model.number="formValues.age">
     </div>
+
+    <!-- <div>
+      <button>Submit</button>
+    </div> -->
   </form>
   <hr>
   <h2>{{ name }}</h2>
@@ -238,12 +269,42 @@ export default {
         remoteWork: "no",
         skillSet: [],
         yearsOfExperience: "",
+        age: null,
       },
+      firstName: "Bruce",
+      lastName: "Wayne",
+      items: [
+        {
+          id: 1,
+          title: "TV",
+          price: 100,
+        },
+        {
+          id: 2,
+          title: "Phone",
+          price: 200,
+        },
+        {
+          id: 3,
+          title: "Laptop",
+          price: 300,
+        },
+      ],
+      country: "",
+      volume: 0,
+      movie: "Taiwan",
+      movieInfo: {
+        title: "",
+        actor: "",
+      },
+      movieList: [
+        "Batman",
+        "Superman",
+      ],
     };
   },
   methods: {
-    submitForm(event) {
-      event.preventDefault();
+    submitForm() {
       console.log("Form Values", this.formValues);
     },
     changeName(event) {
@@ -268,6 +329,57 @@ export default {
     decrement(num, event) {
       this.count -= num;
       console.log("Event", event)
+    },
+    getTotal() {
+      console.log("getTotal Method");
+      return this.items.reduce((total, curr) => (total = total + curr.price), 0);
+    },
+    changeFullName() {
+      this.fullName = "Clark Kent";
+    }
+  },
+  computed: {
+    fullName: {
+      get() {
+        return `${this.firstName} ${this.lastName}`;
+      },
+      set(value) {
+        const names = value.split(' ');
+        this.firstName = names[0];
+        this.lastName = names[1];
+      }
+    },
+    total() {
+      console.log("total computed property");
+      return this.items.reduce((total, curr) => (total = total + curr.price), 0);
+    },
+    expensiveItems() {
+      return this.items.filter(item => item.price > 100);
+    },
+  },
+  watch: {
+    volume(newValue, oldValue) {
+      if(newValue > oldValue && newValue === 16){
+        alert("Listening to a high volume for a long time may damage your hearing");
+      }
+    },
+    movie: {
+      handler(newValue) {
+        console.log(`Calling API with movie name = ${newValue}`);
+      },
+      immediate: true,
+    },
+    movieInfo: {
+      handler(newValue) {
+        console.log(`Calling API with movie title = ${newValue.title} and actor = ${newValue.actor}`);
+      },
+      deep: true,
+    },
+    movieList: {
+      handler(newValue) {
+        console.log(`Updated list ${newValue}`);
+      },
+      // deep: true,
     },
   },
 };
