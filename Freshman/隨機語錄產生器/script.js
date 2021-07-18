@@ -21,7 +21,7 @@ async function getQuote() {
 
         const json = await response.json();
         displayQuote(json.message);
-        setQuote(json.message);
+        setTweetButton(json.message);
     } catch (err) {
         console.log(err);
         alert("產生語錄失敗");
@@ -39,5 +39,3 @@ function displayQuote(quote) {
 function setTweetButton(quote) {
     twittreButton.setAttribute("href", `https://twitter.com/share?text=${quote} - Donald Trump`);
 }
-
-getQuote();
