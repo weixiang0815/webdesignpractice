@@ -10,9 +10,29 @@
 </head>
 
 <body>
-    <button type="button" id="js-new-quote" class="new-quote button">
-        產生新語錄
-    </button>
+    <div class="app">
+        <header>川普經典語錄</header>
+        <section class="quotes">
+            <div class="quote-text" id="js-quote-text"></div>
+        </section>
+        <div class="sk-cube-grid hidden">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+        </div>
+        <section class="controls">
+            <button type="button" id="js-new-quote" class="new-quote button">
+            產生新語錄
+          </button>
+            <a class="twitter button" id="js-tweet" target="_blank" rel="noreferrer">發佈到Twitter!</a>
+        </section>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="/script.js"></script>
